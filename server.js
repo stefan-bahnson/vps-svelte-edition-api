@@ -1,9 +1,7 @@
-import dotenv from "dotenv"
 import express from "express"
 import { ApolloServer } from "apollo-server-express"
 import mongoose from "mongoose"
-
-dotenv.config()
+const LOCAL_DB = "mongodb://localhost:27017/vps_svelte_db"
 
 import typeDefs from "./typeDefs.js"
 import resolvers from "./resolvers.js"
@@ -25,7 +23,7 @@ async function start() {
   const { DB_CONNECTION_STRING } = process.env
 
   try {
-    await mongoose.connect(DB_CONNECTION_STRING, {
+    await mongoose.connect(DB_CONNECTION_STRING || LOCAL_DB, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useFindAndModify: false,
