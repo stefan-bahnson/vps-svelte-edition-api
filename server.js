@@ -22,20 +22,16 @@ async function start() {
     res.send("Hello from Apollo server express")
   })
 
-  const {DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME} = process.env
-
-  console.log("env", {
-    DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME
-  }, `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`)
+  const { DB_CONNECTION_STRING } = process.env
 
   try {
-    await mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`, {
+    await mongoose.connect(DB_CONNECTION_STRING, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useFindAndModify: false,
     })
 
-    console.log(`mongodb connected to ${process.env.DB_HOST}:${process.env.DB_PORT}`)
+    console.log("mongodb connected!")
   } catch (error) {
     console.log("error connecting to mongo", error)
   }
