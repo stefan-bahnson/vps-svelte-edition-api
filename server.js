@@ -22,8 +22,13 @@ async function start() {
     res.send("Hello from Apollo server express")
   })
 
+  const {DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME} = process.env
+
+  console.log("env", {
+    DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME
+  })
+
   try {
-    console.log("env", process.env)
     await mongoose.connect(`${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
