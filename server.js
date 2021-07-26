@@ -36,7 +36,7 @@ async function start() {
     console.log("error connecting to mongo", error)
   }
 
-  app.listen(4000, () => console.log("Server is running on port 4000"))
+  app.listen({port: process.env.PORT || 4000}, () => console.log("Server is running on port 4000"))
 }
 
 start()
