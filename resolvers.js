@@ -3,7 +3,9 @@ import Order from "./models/Order.model.js"
 const resolvers = {
   Query: {
     orders: async () => {
-      return await Order.find().sort({ created: -1 })
+      return await Order.find().sort({
+        created: -1,
+      })
     },
     order: async (_, args) => {
       const { id } = args
